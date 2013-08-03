@@ -36,10 +36,14 @@ class Length{
 	private static BigDecimal compute(BigDecimal a, String operator, BigDecimal b)
 	{
 		if(operator.equals("+"))
-			return a.add(b);
+		{
+			a = a.add(b);
+		}
 		if(operator.equals("-"))
-			return a.subtract(b);
-		return new BigDecimal(0);
+		{
+			a = a.subtract(b);
+		}
+		return a;
 	}
 
 	private static void readFile(String path) throws FileNotFoundException
@@ -98,7 +102,7 @@ class Length{
 					BigDecimal b = new BigDecimal(queue.poll());
 					scale = queue.poll();
 					b = b.multiply(new BigDecimal(map.get(scale)));
-					result.add(compute(result, operator, b));
+					result = result.add(compute(result, operator, b));
 				}
 				System.out.println(result.setScale(2, BigDecimal.ROUND_HALF_EVEN) + " m");
 			}
